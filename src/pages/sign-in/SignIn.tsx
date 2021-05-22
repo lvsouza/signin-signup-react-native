@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 
 export const SignIn: React.FC = () => {
+  const [isHidePassword, setIsHidePassword] = useState(true);
+
+  const [keepConnected, setKeepConnected] = useState(true);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
   return (
     <View style={styles.contentBase}>
       <View style={styles.contentCenter}>
@@ -10,26 +17,64 @@ export const SignIn: React.FC = () => {
         <Text style={styles.title}>Fazer login</Text>
 
         <View style={styles.form}>
-          <TextInput
-            placeholder="Email"
-            style={styles.emailInput}
-          />
-          <TextInput
-            placeholder="Password"
-            style={styles.emailPassword}
-          />
+
+          <View style={styles.emailWrapper}>
+            <Ionicons
+              size={25}
+              color="red"
+              name="person"
+              style={styles.emailIcon}
+            />
+
+            <TextInput
+              value={email}
+              placeholder="Email"
+              onChangeText={setEmail}
+              style={styles.emailInput}
+            />
+          </View>
+
+          <View style={styles.passwordWrapper}>
+            <Ionicons
+              size={25}
+              name="key"
+              color="red"
+              style={styles.passwordIconStart}
+            />
+
+            <TextInput
+              value={password}
+              placeholder="Password"
+              onChangeText={setPassword}
+              style={styles.passwordInput}
+              secureTextEntry={isHidePassword}
+            />
+
+            <Ionicons
+              size={25}
+              color="red"
+              style={styles.passwordIconEnd}
+              name={isHidePassword ? "eye-off" : "eye"}
+              onPress={() => setIsHidePassword(!isHidePassword)}
+            />
+          </View>
 
           <View style={styles.checkboxContainer}>
-            <Checkbox />
+            <Checkbox
+              color="red"
+              value={keepConnected}
+              onValueChange={setKeepConnected}
+            />
             <Text>Manter conectado</Text>
           </View>
 
           <TouchableOpacity style={styles.signInButton}>
-            <Text>Entrar</Text>
+            <Text style={styles.signButtonText}>Entrar</Text>
           </TouchableOpacity>
-          <Text>Não tem uma conta ainda?</Text>
+
+          <Text style={styles.haveNoAccount}>Não tem uma conta ainda?</Text>
           <TouchableOpacity style={styles.signUpButton}>
-            <Text>Cadastrar-se</Text>
+            <Text style={styles.signUpButtonText}>Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
 
@@ -47,41 +92,97 @@ const styles = StyleSheet.create({
   contentCenter: {
     width: '80%'
   },
-  subTitle: {
-    fontWeight: '300',
-    fontSize: 22,
-  },
+
+
   title: {
     textAlign: 'center',
     fontWeight: '700',
     fontSize: 36,
   },
+  subTitle: {
+    fontWeight: '300',
+    fontSize: 22,
+  },
+
+
   form: {
-    marginTop: 15,
+    marginTop: 25,
+  },
+
+
+  emailIcon: {
+    marginLeft: 10,
+    marginRight: -35,
+  },
+  emailWrapper: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   emailInput: {
     borderColor: 'red',
+    paddingLeft: 45,
     borderRadius: 4,
     borderWidth: 1,
     padding: 10,
+    flex: 1,
   },
-  emailPassword: {
+
+  passwordIconStart: {
+    marginLeft: 10,
+    marginRight: -35,
+  },
+  passwordIconEnd: {
+    marginRight: 10,
+    marginLeft: -35,
+  },
+  passwordWrapper: {
+    marginTop: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+  passwordInput: {
     borderColor: 'red',
+    paddingRight: 45,
+    paddingLeft: 45,
     borderRadius: 4,
     borderWidth: 1,
     padding: 10,
+    flex: 1,
   },
+
+
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 5,
+  },
+
+
+  signButtonText: {
+    color: 'white',
+    textAlign: 'center',
   },
   signInButton: {
-    padding: 10,
+    padding: 15,
+    marginTop: 15,
+    borderRadius: 4,
     backgroundColor: 'red',
   },
+
+
+  haveNoAccount: {
+    marginTop: 20,
+    textAlign: 'center',
+  },
+  signUpButtonText: {
+    color: 'red',
+    textAlign: 'center',
+  },
   signUpButton: {
-    padding: 10,
+    padding: 15,
+    marginTop: 10,
     borderWidth: 1,
+    borderRadius: 4,
     borderColor: 'red',
   }
 });
