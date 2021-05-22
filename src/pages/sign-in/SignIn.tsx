@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
@@ -9,6 +9,14 @@ export const SignIn: React.FC = () => {
   const [keepConnected, setKeepConnected] = useState(true);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+
+  const handleSignIn = useCallback(() => {
+    if (email.includes('@') && email.includes('.')) {
+
+    } else {
+      alert('Email inválido.')
+    }
+  }, []);
 
   return (
     <View style={styles.contentBase}>
@@ -68,7 +76,14 @@ export const SignIn: React.FC = () => {
             <Text>Manter conectado</Text>
           </View>
 
-          <TouchableOpacity style={styles.signInButton}>
+          <TouchableOpacity
+            style={{
+              ...styles.signInButton,
+              opacity: (password.length < 3 || email.length) < 3 ? 0.5 : 1
+            }}
+            onPress={handleSignIn}
+            disabled={(password.length < 3 || email.length) < 3}
+          >
             <Text style={styles.signButtonText}>Entrar</Text>
           </TouchableOpacity>
 
