@@ -6,22 +6,16 @@ export const SignIn: React.FC = () => {
   return (
     <View style={styles.contentBase}>
       <View style={styles.contentCenter}>
-        <Text style={styles.title}>Teste</Text>
-        <Text style={styles.subTitle}>Teste</Text>
 
-        {/* <View>
-          <Image
-            source={require("src/shared/assets/logo-mobile.ico")}
-          />
-        </View> */}
+        <Text style={styles.title}>Fazer login</Text>
 
         <View style={styles.form}>
           <TextInput
-            placeholder="Teste"
+            placeholder="Email"
             style={styles.emailInput}
           />
           <TextInput
-            placeholder="Teste"
+            placeholder="Password"
             style={styles.emailPassword}
           />
 
@@ -38,6 +32,7 @@ export const SignIn: React.FC = () => {
             <Text>Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     </View>
   );
@@ -57,10 +52,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   title: {
-    fontWeight: '600',
+    textAlign: 'center',
+    fontWeight: '700',
     fontSize: 36,
   },
-  form: {},
+  form: {
+    marginTop: 15,
+  },
   emailInput: {
     borderColor: 'red',
     borderRadius: 4,
@@ -83,7 +81,7 @@ const styles = StyleSheet.create({
   },
   signUpButton: {
     padding: 10,
-    borderColor: 'red',
     borderWidth: 1,
+    borderColor: 'red',
   }
 });
