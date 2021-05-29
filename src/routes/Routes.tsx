@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
-import { SignIn } from '../pages';
+import { SignIn, SignUp } from '../pages';
 
 const Stack = createStackNavigator();
 export const Routes: React.FC = () => {
@@ -19,7 +19,7 @@ export const Routes: React.FC = () => {
 
         <Stack.Screen
           name="SignUp"
-          component={SignIn}
+          component={SignUp}
           options={{ headerShown: false, cardStyle: { backgroundColor: '#ffffff' } }}
         />
 

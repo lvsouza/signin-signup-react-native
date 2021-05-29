@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 
 export const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+
   const [isHidePassword, setIsHidePassword] = useState(true);
 
   const [keepConnected, setKeepConnected] = useState(true);
@@ -17,6 +20,10 @@ export const SignIn: React.FC = () => {
       alert('Email inválido.')
     }
   }, []);
+
+  const handleSignUp = useCallback(() => {
+    navigation.navigate('SignUp');
+  }, [navigation]);
 
   return (
     <View style={styles.contentBase}>
@@ -88,7 +95,7 @@ export const SignIn: React.FC = () => {
           </TouchableOpacity>
 
           <Text style={styles.haveNoAccount}>Não tem uma conta ainda?</Text>
-          <TouchableOpacity style={styles.signUpButton}>
+          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
             <Text style={styles.signUpButtonText}>Cadastrar-se</Text>
           </TouchableOpacity>
         </View>
