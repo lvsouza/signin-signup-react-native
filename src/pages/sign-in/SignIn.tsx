@@ -15,7 +15,7 @@ export const SignIn: React.FC = () => {
 
   const handleSignIn = useCallback(() => {
     if (email.includes('@') && email.includes('.')) {
-
+      navigation.navigate('Dashboard');
     } else {
       alert('Email inválido.')
     }
