@@ -3,13 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-import { SignIn } from './src/pages';
+import { Routes } from './src/routes/Routes';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.safeContent}>
       <StatusBar />
-      <SignIn />
+      <Routes />
     </SafeAreaView>
   );
 }
