@@ -1,9 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextField } from '../../shared/components/TextField';
+import { useNavigation } from '@react-navigation/core';
+import { SignUpService } from '../../shared/services';
+import { Ionicons } from '@expo/vector-icons';
 
 export const SignUp: React.FC = () => {
+  const { goBack } = useNavigation();
+
   const [isHidePasswordAgain, setIsHidePasswordAgain] = useState(true);
   const [isHidePassword, setIsHidePassword] = useState(true);
 
@@ -13,13 +17,23 @@ export const SignUp: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSignUp = useCallback(() => {
+  const handleSignUp = useCallback(async () => {
     if ((email.includes('@') && email.includes('.'))) {
+      const result = await SignUpService.signUp({ name: fullName, email, password, username: userName });
 
+      if (result.success) {
+        goBack();
+      } else {
+        if (!result.messages || result.messages.length === 0) {
+          alert('Erro no cadastro!');
+        } else {
+          alert(result.messages.join(',\n'));
+        }
+      }
     } else {
       alert('Dados inválidos.')
     }
-  }, []);
+  }, [email, fullName, password, userName]);
 
   return (
     <View style={styles.contentBase}>

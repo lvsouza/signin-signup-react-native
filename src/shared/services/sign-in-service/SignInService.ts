@@ -6,7 +6,6 @@ import { Api } from "../axios-config/AxiosConfig";
 const signIn = async (email: string, password: string): Promise<IRequestResult<{ accessToken?: string }>> => {
     try {
         const { data } = await Api.post('/sign-in', { email, password });
-
         if (data?.accessToken) {
             return {
                 success: true,

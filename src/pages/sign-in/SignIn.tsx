@@ -4,22 +4,33 @@ import { useNavigation } from '@react-navigation/core';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 
+import { SignInService } from '../../shared/services';
+
 export const SignIn: React.FC = () => {
   const navigation = useNavigation();
 
   const [isHidePassword, setIsHidePassword] = useState(true);
-
   const [keepConnected, setKeepConnected] = useState(true);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSignIn = useCallback(() => {
+  const handleSignIn = useCallback(async () => {
     if (email.includes('@') && email.includes('.')) {
-      navigation.navigate('Dashboard');
+      const { success, messages, data } = await SignInService.signIn(email, password);
+
+      if (success && data?.accessToken) {
+        navigation.navigate('Dashboard');
+      } else {
+        if (!messages || messages.length === 0) {
+          alert('Erro no login!');
+        } else {
+          alert(messages.join(',\n'));
+        }
+      }
     } else {
       alert('Email inválido.');
     }
-  }, []);
+  }, [email, password]);
 
   const handleSignUp = useCallback(() => {
     navigation.navigate('SignUp');
