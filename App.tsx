@@ -1,16 +1,19 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 
+import { AuthorizationProvider } from './src/shared/contexts';
 import { Routes } from './src/routes/Routes';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeContent}>
-      <StatusBar />
-      <Routes />
-    </SafeAreaView>
+    <AuthorizationProvider>
+      <SafeAreaView style={styles.safeContent}>
+        <StatusBar />
+        <Routes />
+      </SafeAreaView>
+    </AuthorizationProvider>
   );
 }
 
