@@ -17,7 +17,7 @@ export const SignIn: React.FC = () => {
     if (email.includes('@') && email.includes('.')) {
       navigation.navigate('Dashboard');
     } else {
-      alert('Email inválido.')
+      alert('Email inválido.');
     }
   }, []);
 
